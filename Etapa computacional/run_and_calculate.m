@@ -152,6 +152,30 @@ iae_vec = [iae_vec IAE_arq10];
 
 arq10_param = [TV_arq10 ISE_arq10 IAE_arq10];
 
+DesData = out.control11.data(idx);
+TV_arq11 = calcTV(DesData,Tsim);
+DesData = out.output11.data(idx);
+ISE_arq11 = calcISE(DesData,DesRef,Tsim);
+IAE_arq11 = calcIAE(DesData,DesRef,Tsim);
+
+tv_vec = [tv_vec TV_arq11];
+ise_vec = [ise_vec ISE_arq11];
+iae_vec = [iae_vec IAE_arq11];
+
+arq11_param = [TV_arq11 ISE_arq11 IAE_arq11];
+
+DesData = out.control12.data(idx);
+TV_arq12 = calcTV(DesData,Tsim);
+DesData = out.output12.data(idx);
+ISE_arq12 = calcISE(DesData,DesRef,Tsim);
+IAE_arq12 = calcIAE(DesData,DesRef,Tsim);
+
+tv_vec = [tv_vec TV_arq12];
+ise_vec = [ise_vec ISE_arq12];
+iae_vec = [iae_vec IAE_arq12];
+
+arq12_param = [TV_arq12 ISE_arq12 IAE_arq12];
+
 disp(['Arq1:  IAE = ', num2str(IAE_arq1), ' ISE = ', num2str(ISE_arq1), ' TV = ', num2str(TV_arq1)])
 disp(['Arq2:  IAE = ', num2str(IAE_arq2), ' ISE = ', num2str(ISE_arq2), ' TV = ', num2str(TV_arq2)])
 disp(['Arq3:  IAE = ', num2str(IAE_arq3), ' ISE = ', num2str(ISE_arq3), ' TV = ', num2str(TV_arq3)])
@@ -162,6 +186,8 @@ disp(['Arq7:  IAE = ', num2str(IAE_arq7), ' ISE = ', num2str(ISE_arq7), ' TV = '
 disp(['Arq8:  IAE = ', num2str(IAE_arq8), ' ISE = ', num2str(ISE_arq8), ' TV = ', num2str(TV_arq8)])
 disp(['Arq9:  IAE = ', num2str(IAE_arq9), ' ISE = ', num2str(ISE_arq9), ' TV = ', num2str(TV_arq9)])
 disp(['Arq10: IAE = ', num2str(IAE_arq10), ' ISE = ', num2str(ISE_arq10), ' TV = ', num2str(TV_arq10)])
+disp(['Arq11: IAE = ', num2str(IAE_arq11), ' ISE = ', num2str(ISE_arq11), ' TV = ', num2str(TV_arq11)])
+disp(['Arq12: IAE = ', num2str(IAE_arq12), ' ISE = ', num2str(ISE_arq12), ' TV = ', num2str(TV_arq12)])
 
 [sorted_tv,idx_tv] = sort(tv_vec);
 [sorted_iae,idx_iae] = sort(iae_vec);
@@ -189,13 +215,32 @@ plot(out.output6,'color', '#01B8AA', 'LineWidth', 2);
 plot(out.output7,'color', '#FFC1CB', 'LineWidth', 2);
 plot(out.output8, 'm', 'LineWidth', 2);
 plot(out.output10, 'k', 'LineWidth', 2);
-legend('r', 'd', 'Arq 1', 'Arq 2', 'Arq 3', 'Arq 4', 'Arq 5', 'Arq 6', 'Arq 7', 'Arq 8', 'Arq 10');
+plot(out.output11, 'color', '#01B8AA', 'LineWidth', 2);
+plot(out.output12, 'color', '#01B8AA', 'LineWidth', 2);
+legend('r', 'd', 'Arq 1', 'Arq 2', 'Arq 3', 'Arq 4', 'Arq 5', 'Arq 6', 'Arq 7', 'Arq 8', 'Arq 10', 'Arq 11', 'Arq 12');
 ylabel('System Output');
 xlabel('Time (s)');
 ylim([-0.01 1.5])
-set(gca, 'fontsize', 16, 'fontweight', 'bold');
+set(gca, 'fontsize', 16, 'fontweight', 'bold', 'color', 'none');
+title('')
+%f.WindowState = 'maximized';
+%%
+f = figure;
+plot(out.input, 'LineWidth', 2);
+hold
+plot(out.dist, 'LineWidth', 2);
+plot(out.output, 'LineWidth', 2);
+plot(out.output8, 'LineWidth', 2);
+plot(out.output11, 'LineWidth', 2);
+plot(out.output12, 'LineWidth', 2);
+legend('r', 'd', 'Arq 1', 'Arq 8', 'Arq 11', 'Arq 12');
+ylabel('System Output');
+xlabel('Time (s)');
+ylim([-0.01 1.5])
+set(gca, 'fontsize', 16, 'fontweight', 'bold', 'color', 'none');
 title('')
 f.WindowState = 'maximized';
+
 %%
 f = figure;
 plot(out.input, 'LineWidth', 2);
@@ -380,18 +425,34 @@ plot(out.control2, 'LineWidth', 2);
 plot(out.control3, 'LineWidth', 2);
 plot(out.control4, 'LineWidth', 2);
 plot(out.control5, 'LineWidth', 2);
-%plot(out.control6, 'color', '#01B8AA', 'LineWidth', 2);
+plot(out.control6, 'color', '#01B8AA', 'LineWidth', 2);
 %plot(out.control7,'color', '#FFC1CB', 'LineWidth', 2);
-plot(out.control8, 'm', 'LineWidth', 2);
+%plot(out.control8, 'm', 'LineWidth', 2);
 %plot(out.control10, 'k', 'LineWidth', 2);
 legend('r', 'd', 'Arq 1', 'Arq 2', 'Arq 3', 'Arq 4', 'Arq 5', 'Arq 6', 'Arq 7', 'Arq 8', 'Arq 10');
 ylabel('Control Signal');
 xlabel('Time (s)');
-%ylim([-32 40])
-ylim([-2 4.5])
+ylim([-32 40])
 set(gca, 'fontsize', 16, 'fontweight', 'bold');
 title('')
 f.WindowState = 'maximized';
+%%
+f = figure;
+plot(out.input, 'LineWidth', 2);
+hold
+plot(out.dist, 'LineWidth', 2);
+plot(out.control, 'LineWidth', 2);
+plot(out.control8, 'LineWidth', 2);
+plot(out.control11, 'LineWidth', 2);
+plot(out.control12, 'LineWidth', 2);
+legend('r', 'd', 'Arq 1', 'Arq 8', 'Arq 11', 'Arq 12');
+ylabel('Control Signal');
+xlabel('Time (s)');
+ylim([-32 40])
+set(gca, 'fontsize', 16, 'fontweight', 'bold');
+title('')
+f.WindowState = 'maximized';
+
 %%
 f = figure;
 plot(out.input, 'LineWidth', 2);
@@ -447,23 +508,6 @@ xlabel('Time (s)');
 ylim([-0.6 3.5])
 set(gca, 'fontsize', 16, 'fontweight', 'bold');
 title('')
-f.WindowState = 'maximized';
-%%
-f = figure;
-plot(out.input, 'LineWidth', 2);
-hold
-plot(out.dist, 'LineWidth', 2);
-plot(out.control, 'LineWidth', 2);
-plot(out.control6, 'LineWidth', 2);
-%plot(out.control7, 'LineWidth', 2);
-plot(out.control8, 'LineWidth', 2);
-%plot(out.control10, 'LineWidth', 2);
-legend('r', 'd', 'Arq 1', 'Arq 7', 'Arq 8', 'Arq 10');
-ylabel('Control Signal');
-xlabel('Time (s)');
-ylim([-20 20])
-set(gca, 'fontsize', 16, 'fontweight', 'bold');
-title(['sigma_n = ' num2str(sigma_n)])
 f.WindowState = 'maximized';
 
 %% Cont 8, 9 and 10
@@ -592,7 +636,7 @@ arq5_param = [TV_arq5 ISE_arq5 IAE_arq5];
 
 disp(['Arq1: IAE = ', num2str(IAE_arq1), ' ISE = ', num2str(ISE_arq1), ' TV = ', num2str(TV_arq1)])
 disp(['Arq2: IAE = ', num2str(IAE_arq2), ' ISE = ', num2str(ISE_arq2), ' TV = ', num2str(TV_arq2)])
-disp(['Arq FE: IAE = ', num2str(IAE_arq3), ' ISE = ', num2str(ISE_arq3), ' TV = ', num2str(TV_arq3)])
+disp(['Arq3: IAE = ', num2str(IAE_arq3), ' ISE = ', num2str(ISE_arq3), ' TV = ', num2str(TV_arq3)])
 %disp(['Arq4: IAE = ', num2str(IAE_arq4), ' ISE = ', num2str(ISE_arq4), ' TV = ', num2str(TV_arq4)])
 disp(['Arq5: IAE = ', num2str(IAE_arq5), ' ISE = ', num2str(ISE_arq5), ' TV = ', num2str(TV_arq5)])
 %disp(['Arq6: IAE = ', num2str(IAE_arq6), ' ISE = ', num2str(ISE_arq6), ' TV = ', num2str(TV_arq6)])
@@ -614,7 +658,6 @@ disp(idx_tv)
 
 %% Plot graph
 if plotg
-    %%
 f = figure;
 plot(out.input, 'LineWidth', 2);
 hold
@@ -627,9 +670,9 @@ legend('r', 'd', 'Arq 1', 'Arq 2', 'Arq FE', 'Arq 5');
 ylabel('System Output');
 xlabel('Time (s)');
 ylim([-0.01 1.5])
-set(gca, 'fontsize', 16, 'fontweight', 'bold');
+set(gca, 'fontsize', 16, 'fontweight', 'bold', 'color', 'none');
 title('')
-f.WindowState = 'maximized';
+%f.WindowState = 'maximized';
 
 %%
 
@@ -641,7 +684,7 @@ plot(out.noise, 'LineWidth', 2);
 plot(out.noise2, 'LineWidth', 2);
 plot(out.noise3, 'LineWidth', 2);
 plot(out.noise5, 'LineWidth', 2);
-legend('r', 'd', 'Arq 1', 'Arq 2', 'Arq FE', 'Arq 5');
+legend('r', 'd', 'Arq 1', 'Arq 2', 'Arq 3 s/ Observ', 'Arq 5');
 ylabel('System Output w/ noise');
 xlabel('Time (s)');
 ylim([-0.01 1.5])
@@ -652,30 +695,14 @@ f.WindowState = 'maximized';
 %%
 
 f = figure;
-plot(out.input, 'LineWidth', 2);
+plot(out.input.time(idx), out.input.data(idx), 'LineWidth', 2);
 hold
-plot(out.dist, 'LineWidth', 2);
-plot(out.control, 'LineWidth', 2);
-plot(out.control2, 'LineWidth', 2);
-plot(out.control3, 'LineWidth', 2);
-plot(out.control5, 'LineWidth', 2);
-legend('r', 'd', 'Arq 1', 'Arq 2', 'Arq FE', 'Arq 5');
-ylabel('Control Signal');
-xlabel('Time (s)');
-ylim([-6 6])
-set(gca, 'fontsize', 16, 'fontweight', 'bold');
-title('')
-f.WindowState = 'maximized';
-%%
-f = figure;
-plot(out.input, 'LineWidth', 2);
-hold
-plot(out.dist, 'LineWidth', 2);
-plot(out.control, 'LineWidth', 2);
+plot(out.dist.time(idx), out.dist.data(idx), 'LineWidth', 2);
+plot(out.control.time(idxct), out.control.data(idxct), 'LineWidth', 2);
 legend('r', 'd', 'Arq 1');
-ylabel('Control Signal');
+ylabel('System Output w/ noise');
 xlabel('Time (s)');
-ylim([-2 5.5])
+ylim([-2 6])
 set(gca, 'fontsize', 16, 'fontweight', 'bold');
 title('')
 f.WindowState = 'maximized';
@@ -687,7 +714,7 @@ plot(out.dist, 'LineWidth', 2);
 plot(out.control, 'LineWidth', 2);
 plot(out.control2, 'LineWidth', 2);
 legend('r', 'd', 'Arq 1', 'Arq 2');
-ylabel('Control Signal');
+ylabel('System Output w/ noise');
 xlabel('Time (s)');
 ylim([-6 6])
 set(gca, 'fontsize', 16, 'fontweight', 'bold');
@@ -700,8 +727,8 @@ hold
 plot(out.dist, 'LineWidth', 2);
 plot(out.control, 'LineWidth', 2);
 plot(out.control3, 'LineWidth', 2);
-legend('r', 'd', 'Arq 1', 'Arq FE');
-ylabel('Control Signal');
+legend('r', 'd', 'Arq 1', 'Arq 3 s/ Observ');
+ylabel('System Output w/ noise');
 xlabel('Time (s)');
 ylim([-1.5 2.5])
 set(gca, 'fontsize', 16, 'fontweight', 'bold');
@@ -715,7 +742,7 @@ plot(out.dist, 'LineWidth', 2);
 plot(out.control, 'LineWidth', 2);
 plot(out.control5, 'LineWidth', 2);
 legend('r', 'd', 'Arq 1', 'Arq 5');
-ylabel('Control Signal');
+ylabel('System Output w/ noise');
 xlabel('Time (s)');
 ylim([-7 7])
 set(gca, 'fontsize', 16, 'fontweight', 'bold');
@@ -845,7 +872,6 @@ disp(idx_tv)
 
 %% Plot graph
 if plotg
-    %%
 f = figure;
 plot(out.input, 'LineWidth', 2);
 hold
@@ -860,7 +886,7 @@ xlabel('Time (s)');
 ylim([-0.01 1.65])
 set(gca, 'fontsize', 16, 'fontweight', 'bold');
 title('')
-f.WindowState = 'maximized';
+%f.WindowState = 'maximized';
 
 %%
 
@@ -872,7 +898,7 @@ plot(out.noise, 'LineWidth', 2);
 plot(out.noise2, 'LineWidth', 2);
 plot(out.noise3, 'LineWidth', 2);
 plot(out.noise5, 'LineWidth', 2);
-legend('r', 'd', 'Arq 1', 'Arq 2', 'Arq FE', 'Arq 5');
+legend('r', 'd', 'Arq 1', 'Arq 2', 'Arq 3 s/ Observ', 'Arq 5');
 ylabel('System Output w/ noise');
 xlabel('Time (s)');
 ylim([-0.01 1.8])
@@ -890,14 +916,14 @@ plot(out.control, 'LineWidth', 2);
 plot(out.control2, 'LineWidth', 2);
 plot(out.control3, 'LineWidth', 2);
 plot(out.control5, 'LineWidth', 2);
-legend('r', 'd', 'Arq 1', 'Arq 2', 'Arq FE', 'Arq 5');
-ylabel('Control Signal');
+legend('r', 'd', 'Arq 1', 'Arq 2', 'Arq 3 s/ Observ', 'Arq 5');
+ylabel('System Output w/ noise');
 xlabel('Time (s)');
 ylim([-30 31])
 set(gca, 'fontsize', 16, 'fontweight', 'bold');
 title('')
 f.WindowState = 'maximized';
-%%
+
 f = figure;
 plot(out.input, 'LineWidth', 2);
 hold
@@ -905,8 +931,8 @@ plot(out.dist, 'LineWidth', 2);
 plot(out.control, 'LineWidth', 2);
 plot(out.control3, 'LineWidth', 2);
 plot(out.control5, 'LineWidth', 2);
-legend('r', 'd', 'Arq 1', 'Arq FE', 'Arq 5');
-ylabel('Control Signal');
+legend('r', 'd', 'Arq 1', 'Arq 3 s/ Observ', 'Arq 5');
+ylabel('System Output w/ noise');
 xlabel('Time (s)');
 ylim([-4 4])
 set(gca, 'fontsize', 16, 'fontweight', 'bold');
@@ -919,8 +945,8 @@ hold
 plot(out.dist, 'LineWidth', 2);
 plot(out.control3, 'LineWidth', 2);
 plot(out.control5, 'LineWidth', 2);
-legend('r', 'd', 'Arq FE', 'Arq 5');
-ylabel('Control Signal');
+legend('r', 'd', 'Arq 3 s/ Observ', 'Arq 5');
+ylabel('System Output w/ noise');
 xlabel('Time (s)');
 ylim([-4 4])
 set(gca, 'fontsize', 16, 'fontweight', 'bold');
