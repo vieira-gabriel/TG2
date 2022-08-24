@@ -1,0 +1,28 @@
+clear
+values_vector = [45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100, 110, 120, 130];
+
+[r,columns] = size(values_vector);
+
+
+for c = 1:columns
+    filename = ['arq2_tm', num2str(values_vector(1,c)), '.mat']
+    if exist('ref', 'var') == 0
+        load('arq2_tm45.mat', 'refSignal', 'inputSignal')
+        ref = refSignal;
+        input = inputSignal;
+        
+        save('compara', 'ref', 'input');
+    end
+    
+    load(filename, 'sinalControle_saturado', 'sinalSaida_sem_filtro', 'Controle_Simulado', 'Saida_Simulado')
+    
+    if exist('values_vec','var') == 0
+        saidas = [sinalSaida_sem_filtro; Saida_Simulado; sinalControle_saturado; Controle_Simulado]
+    else
+        vec = [sinalSaida_sem_filtro; Saida_Simulado; sinalControle_saturado; Controle_Simulado]
+        
+        saidas = [saidas sinalSaida_sem_filtro]
+    end   
+end
+
+save('compara', 'ref', 'input', 'values_vec', 'values_vector');
