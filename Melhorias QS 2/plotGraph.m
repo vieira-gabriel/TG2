@@ -1,5 +1,9 @@
-values_to_plot=[45, 50, 60, 70, 80];
-colour_vec = ['b', 'y', 'c', 'k', 'r'];
+clear
+
+load('compara')
+
+values_to_plot=[85, 100, 120];
+colour_vec = ['b', 'g', 'r', 'c', 'y', 'k'];
 
 [rowl,columns] = size(values_to_plot);
 legenCell = cell(rowl,columns+1);
