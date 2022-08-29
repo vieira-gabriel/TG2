@@ -3,13 +3,19 @@ addpath('./functions/');
 
 clear
 
-values_vector = [45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100, 110, 120, 130];
+compare_arq = 'arq4';
+
+if strcmp(compare_arq, 'arq2')
+    values_vector = [45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100, 110, 120, 130];
+else
+    values_vector = [85, 100, 120];
+end
 
 [r,columns] = size(values_vector);
 
 
 for c = 1:columns
-    filename = ['arq2_tm', num2str(values_vector(1,c)), '.mat'];
+    filename = [compare_arq, '_tm', num2str(values_vector(1,c)), '.mat'];
     
     load(filename, 'sinalControle_saturado', 'sinalSaida_sem_filtro', 'Tsim', 'refSignal')
     tv = calcTV(sinalControle_saturado.data,Tsim);
@@ -31,7 +37,12 @@ end
 [sorted_tv,idx_tv] = sort(tv_vec);
 [sorted_iae_ise,idx_iae_ise] = sort(iae_ise_vec);
 
-filter = 5;
+
+if strcmp(compare_arq, 'arq2')
+    filter = 5;
+else
+    filter = 2;
+end
 
 chosed_values = intersect(idx_tv(1:filter), idx_iae_ise(1:filter));
 
