@@ -16,6 +16,7 @@ for c = 1:columns
         load('arq2_tm45.mat', 'refSignal', 'inputSignal')
         ref = refSignal;
         input = inputSignal;
+        clear('refSignal', 'inputSignal');
     end
     
     load(filename, 'sinalObservador', 'sinalControle_saturado', 'sinalSaida_sem_filtro', 'Controle_Simulado', 'Saida_Simulado')
@@ -27,6 +28,7 @@ for c = 1:columns
     controles = [controles controle_corrigido];
     controles_sim = [controles_sim controle_sim_corrigido];
     observador = [observador sinalObservador];
+    
 end
 
 
@@ -53,4 +55,26 @@ for c = 1:columns
     observador_4 = [observador sinalObservador];
 end
 
-save('compara', 'ref', 'input', 'saidas', 'saidas_sim', 'controles', 'controles_sim', 'values_vector', 'observador', 'saidas_4', 'saidas_sim_4', 'controles_4', 'controles_sim_4', 'values_vector_4', 'observador_4');
+load('arq1_result', 'sinalObservador', 'sinalControle_saturado', 'sinalSaida_sem_filtro', 'Controle_Simulado', 'Saida_Simulado')
+controle_corrigido = sinalControle_saturado - 52;
+controle_sim_corrigido = Controle_Simulado - 52;
+
+saida_1 = sinalSaida_sem_filtro;
+saida_sim_1 =  Saida_Simulado;
+controle_1 = controle_corrigido;
+controle_sim_1 = controle_sim_corrigido;
+observador_1 = sinalObservador;
+
+load('arq3_result', 'sinalObservador', 'sinalControle_saturado', 'sinalSaida_sem_filtro', 'Controle_Simulado', 'Saida_Simulado')
+controle_corrigido = sinalControle_saturado - 52;
+controle_sim_corrigido = Controle_Simulado - 52;
+
+saida_3 = sinalSaida_sem_filtro;
+saida_sim_3 =  Saida_Simulado;
+controle_3 = controle_corrigido;
+controle_sim_3 = controle_sim_corrigido;
+observador_3 = sinalObservador;
+    
+clear('r', 'columns', 'c', 'filename', 'controle_corrigido', 'controle_sim_corrigido', 'sinalObservador', 'sinalControle_saturado', 'sinalSaida_sem_filtro', 'Controle_Simulado', 'Saida_Simulado');
+
+save('compara');
