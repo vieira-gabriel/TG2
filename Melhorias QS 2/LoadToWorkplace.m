@@ -4,11 +4,11 @@ values_vector = [45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100, 110, 120, 130]
 
 [r,columns] = size(values_vector);
 
-saidas = [];
-saidas_sim = [];
-controles = [];
-controles_sim = [];
-observador = [];
+saidas_2 = [];
+saidas_sim_2 = [];
+controles_2 = [];
+controles_sim_2 = [];
+observador_2 = [];
 
 for c = 1:columns
     filename = ['arq2_tm', num2str(values_vector(1,c)), '.mat'];
@@ -23,11 +23,11 @@ for c = 1:columns
     controle_corrigido = sinalControle_saturado - 52;
     controle_sim_corrigido = Controle_Simulado - 52;
 
-    saidas = [saidas sinalSaida_sem_filtro];
-    saidas_sim = [saidas_sim Saida_Simulado];
-    controles = [controles controle_corrigido];
-    controles_sim = [controles_sim controle_sim_corrigido];
-    observador = [observador sinalObservador];
+    saidas_2 = [saidas_2 sinalSaida_sem_filtro];
+    saidas_sim_2 = [saidas_sim_2 Saida_Simulado];
+    controles_2 = [controles_2 controle_corrigido];
+    controles_sim_2 = [controles_sim_2 controle_sim_corrigido];
+    observador_2 = [observador_2 sinalObservador];
     
 end
 
@@ -52,10 +52,10 @@ for c = 1:columns
     saidas_sim_4 = [saidas_sim_4 Saida_Simulado];
     controles_4 = [controles_4 controle_corrigido];
     controles_sim_4 = [controles_sim_4 controle_sim_corrigido];
-    observador_4 = [observador sinalObservador];
+    observador_4 = [observador_4 sinalObservador];
 end
 
-load('arq1_result', 'sinalObservador', 'sinalControle_saturado', 'sinalSaida_sem_filtro', 'Controle_Simulado', 'Saida_Simulado')
+load('arq1_result', 'sinalControle_saturado', 'sinalSaida_sem_filtro', 'Controle_Simulado', 'Saida_Simulado')
 controle_corrigido = sinalControle_saturado - 52;
 controle_sim_corrigido = Controle_Simulado - 52;
 
@@ -63,7 +63,6 @@ saida_1 = sinalSaida_sem_filtro;
 saida_sim_1 =  Saida_Simulado;
 controle_1 = controle_corrigido;
 controle_sim_1 = controle_sim_corrigido;
-observador_1 = sinalObservador;
 
 load('arq3_result', 'sinalObservador', 'sinalControle_saturado', 'sinalSaida_sem_filtro', 'Controle_Simulado', 'Saida_Simulado')
 controle_corrigido = sinalControle_saturado - 52;
