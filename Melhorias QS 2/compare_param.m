@@ -3,7 +3,7 @@ addpath('./functions/');
 
 clear
 
-compare_arq = 'arq2';
+compare_arq = 'arq4';
 
 if strcmp(compare_arq, 'arq2')
     values_vector = [45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100, 110, 120, 125, 130];
@@ -41,7 +41,7 @@ end
 if strcmp(compare_arq, 'arq2')
     filter = 7;
 else
-    filter = 3;
+    filter = 2;
 end
 
 chosed_values = intersect(idx_tv(1:filter), idx_iae_ise(1:filter));
