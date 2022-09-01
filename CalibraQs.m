@@ -6,7 +6,7 @@ load_variables
 Ts_vector = [85, 120];
 [rows,columns] = size(Ts_vector);
 
-path = 'Melhorias QS 3\';
+path = 'Estudos Observador\Melhorias Qs 3\';
 
 Tstepdown = Tstep+(Tref/2);
 
