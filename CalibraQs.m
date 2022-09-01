@@ -2,9 +2,13 @@ clear
 
 load_variables
 
-Ts_vector = [125];
+%%
+Ts_vector = [85, 120];
 [rows,columns] = size(Ts_vector);
-arq = 'arq4';
+
+path = 'Melhorias QS 3\';
+
+Tstepdown = Tstep+(Tref/2);
 
 for c = 1:columns
     disp(['Runing Ts ', num2str(Ts_vector(1,c)), '%'])
@@ -18,13 +22,20 @@ for c = 1:columns
     
     sim(arq, Tsim);
     
-    save(['Melhorias QS 2\',workspace_name]);
+    save([path, workspace_name]);
     
     pause(30);
     end
 end
 
-%sim('arq1', Tsim);
-%save('Melhorias QS 2\arq1_result');
+%%
+
+disp('Runing arq 1')
+sim('arq1', Tsim);
+save([path, 'arq1_result']);
+
+%%
+
+disp('Runing arq 3')
 sim('arq3', Tsim);
-save('Melhorias QS 2\arq3_result');
+save([path, 'arq3_result']);
