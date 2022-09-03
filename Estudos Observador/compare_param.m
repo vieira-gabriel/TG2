@@ -4,11 +4,16 @@ addpath('./functions/');
 clear
 
 compare_arq = 'arq4';
+path = 'Melhorias Qs 2\';
 
 if strcmp(compare_arq, 'arq2')
     values_vector = [45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100, 110, 120, 125, 130];
 else
     values_vector = [85, 100, 120, 125];
+end
+
+if strcmp(path, 'Melhorias Qs 3\')
+    values_vector = [85, 120];
 end
 
 [r,columns] = size(values_vector);
@@ -54,18 +59,18 @@ for i = chosed_values
 end
 
 if strcmp(compare_arq, 'arq2')
-    load([path, 'arq1_result'], 'sinalControle_saturado', 'sinalSaida_sem_filtro', 'Tsim', 'refSignal')
-    name = 'Arq1';
+    %load([path, 'arq1_result'], 'sinalControle_saturado', 'sinalSaida_sem_filtro', 'Tsim', 'refSignal')
+    %name = 'Arq1';
 else
-    load([path, 'arq3_result'], 'sinalControle_saturado', 'sinalSaida_sem_filtro', 'Tsim', 'refSignal')
-    name = 'Arq3';
+    %load([path, 'arq3_result'], 'sinalControle_saturado', 'sinalSaida_sem_filtro', 'Tsim', 'refSignal')
+    %name = 'Arq3';
 end
 
-tv = calcTV(sinalControle_saturado.data,Tsim);
-ise = calcISE(sinalSaida_sem_filtro.data,refSignal.data,Tsim);
-iae = calcIAE(sinalSaida_sem_filtro.data,refSignal.data,Tsim);
-iae_ise = iae/ise;
-disp([name, ' : tv = ', num2str(tv), ' iae/ise = ', num2str(iae_ise)])
+%tv = calcTV(sinalControle_saturado.data,Tsim);
+%ise = calcISE(sinalSaida_sem_filtro.data,refSignal.data,Tsim);
+%iae = calcIAE(sinalSaida_sem_filtro.data,refSignal.data,Tsim);
+%iae_ise = iae/ise;
+%disp([name, ' : tv = ', num2str(tv), ' iae/ise = ', num2str(iae_ise)])
 
 disp('Valores selecionados como melhores: ')
 disp(best)

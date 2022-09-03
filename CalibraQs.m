@@ -33,6 +33,8 @@ end
 disp('Runing arq 1')
 sim('arq1', Tsim);
 save([path, 'arq1_result']);
+   
+pause(20);
 
 %%
 
