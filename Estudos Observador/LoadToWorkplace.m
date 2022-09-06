@@ -35,7 +35,7 @@ end
 
 
 %values_vector_4 = [85, 100, 120];
-values_vector_4 = [50, 70, 85, 120];
+values_vector_4 = [50, 70, 75, 85, 120];
 [r,columns] = size(values_vector_4);
 
 saidas_4 = [];
