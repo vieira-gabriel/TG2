@@ -2,7 +2,7 @@ clear
 
 load('compara')
 
-values_to_plot=[85, 120];
+values_to_plot=[70, 75];
 colour_vec = ['b', 'g', 'r', 'c', 'y', 'k'];
 [rowl,columns] = size(values_to_plot);
 legenCell = cell(rowl,columns+2);
@@ -23,10 +23,10 @@ for c = 1:columns
         legendCell{c} = ['Saída real ',num2str(values_to_plot(c)), '% arq2'];
     end
 end
-%plot(saida_1+24, 'm')
-%legendCell{columns+1} = 'Saída arq 1';
+plot(saida_1+24, 'm')
+legendCell{columns+1} = 'Saída arq 1';
 plot(ref+24, 'k')
-legendCell{columns+1} = 'ref';
+legendCell{columns+2} = 'ref';
 legend(legendCell);
 axis([0 inf -10 65]);
 
@@ -46,11 +46,11 @@ for c = 1:columns
 end
 for c = 1:columns
     idx = find(values_vector == values_to_plot(c));
-        plot(observador_2(idx), colour_vec(c+columns))
-        legendCell{c+columns} = ['Observador ',num2str(values_to_plot(c)), '% arq2'];
+    plot(observador_2(idx), colour_vec(c+columns))
+    legendCell{c+columns} = ['Observador ',num2str(values_to_plot(c)), '% arq2'];
 end
-%plot(controle_1-disturb-52+24, 'm')
-%legendCell{columns*2+1} = 'Controle arq 1';
+plot(controle_1-disturb-52+24, 'm')
+legendCell{columns*2+1} = 'Controle arq 1';
 plot(disturb, 'k')
 legendCell{columns*2+1} = 'disturbio';
 legend(legendCell);
@@ -58,6 +58,9 @@ axis([0 inf -25 35]);
 
 %%
 figure
+%%
+values_to_plot=[120];
+[rowl,columns] = size(values_to_plot);
 
 tiledlayout(2,1)
 
@@ -74,10 +77,10 @@ for c = 1:columns
         legendCell{c} = ['Saída real ',num2str(values_to_plot(c)), '% arq4'];
     end
 end
-%plot(saida_3+24, 'm')
-%legendCell{columns+1} = 'Saída arq 3';
+plot(saida_3+24, 'm')
+legendCell{columns+1} = 'Saída arq 3';
 plot(ref + 24, 'k')
-legendCell{columns+1} = 'ref + disturbio';
+legendCell{columns+1} = 'ref';
 legend(legendCell);
 axis([0 inf -10 65]);
 
@@ -95,14 +98,14 @@ for c = 1:columns
     end
 end
 for c = 1:columns
-    idx = find(values_vector == values_to_plot(c));
-        plot(observador_4(idx), colour_vec(c+columns))
-        legendCell{c+columns} = ['Observador ',num2str(values_to_plot(c)), '% arq4'];
+    idx = find(values_vector_4 == values_to_plot(c));
+    plot(observador_4(idx), colour_vec(c+columns))
+    legendCell{c+columns} = ['Observador ',num2str(values_to_plot(c)), '% arq4'];
 end
-%plot(controle_3-disturb-52+24, 'm')
-%legendCell{columns*2+1} = 'Controle arq 3';
+plot(controle_3-disturb-52+24, 'm')
+legendCell{columns*2+1} = 'Controle arq 3';
 plot(disturb, 'k')
-legendCell{columns*2+1} = 'disturbio';
+legendCell{columns*2+2} = 'disturbio';
 legend(legendCell);
 axis([0 inf -25 35]);
 hold off

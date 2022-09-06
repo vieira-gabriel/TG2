@@ -1,7 +1,7 @@
 clear
 
 %values_vector = [45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100, 110, 120, 130];
-values_vector = [85, 120];
+values_vector = [45, 50, 55, 60, 65, 70, 75, 80, 85, 100, 110, 120];
 
 [r,columns] = size(values_vector);
 path = 'Melhorias Qs 3\';
@@ -35,7 +35,7 @@ end
 
 
 %values_vector_4 = [85, 100, 120];
-values_vector_4 = [85, 120];
+values_vector_4 = [50, 70, 85, 120];
 [r,columns] = size(values_vector_4);
 
 saidas_4 = [];
@@ -58,24 +58,24 @@ for c = 1:columns
     observador_4 = [observador_4 sinalObservador];
 end
 
-%load([path, 'arq1_result'], 'sinalControle_sem_filtro', 'sinalSaida_sem_filtro', 'Controle_Simulado', 'Saida_Simulado')
-%controle_corrigido = sinalControle_sem_filtro - 52;
-%controle_sim_corrigido = Controle_Simulado - 52;
+load([path, 'arq1_result'], 'sinalControle_sem_filtro', 'sinalSaida_sem_filtro', 'Controle_Simulado', 'Saida_Simulado')
+controle_corrigido = sinalControle_sem_filtro - 52;
+controle_sim_corrigido = Controle_Simulado - 52;
 
-%saida_1 = sinalSaida_sem_filtro;
-%saida_sim_1 =  Saida_Simulado;
-%controle_1 = sinalControle_sem_filtro;
-%controle_sim_1 = Controle_Simulado;
+saida_1 = sinalSaida_sem_filtro;
+saida_sim_1 =  Saida_Simulado;
+controle_1 = sinalControle_sem_filtro;
+controle_sim_1 = Controle_Simulado;
 
-%load([path, 'arq3_result'], 'sinalObservador', 'sinalControle_sem_filtro', 'sinalSaida_sem_filtro', 'Controle_Simulado', 'Saida_Simulado')
-%controle_corrigido = sinalControle_sem_filtro - 52;
-%controle_sim_corrigido = Controle_Simulado - 52;
+load([path, 'arq3_result'], 'sinalObservador', 'sinalControle_sem_filtro', 'sinalSaida_sem_filtro', 'Controle_Simulado', 'Saida_Simulado')
+controle_corrigido = sinalControle_sem_filtro - 52;
+controle_sim_corrigido = Controle_Simulado - 52;
 
-%saida_3 = sinalSaida_sem_filtro;
-%saida_sim_3 =  Saida_Simulado;
-%controle_3 = sinalControle_sem_filtro;
-%controle_sim_3 = Controle_Simulado;
-%observador_3 = sinalObservador;
+saida_3 = sinalSaida_sem_filtro;
+saida_sim_3 =  Saida_Simulado;
+controle_3 = sinalControle_sem_filtro;
+controle_sim_3 = Controle_Simulado;
+observador_3 = sinalObservador;
     
 clear('r', 'columns', 'c', 'filename', 'controle_corrigido', 'controle_sim_corrigido', 'sinalObservador', 'sinalControle_saturado', 'sinalSaida_sem_filtro', 'Controle_Simulado', 'Saida_Simulado');
 
