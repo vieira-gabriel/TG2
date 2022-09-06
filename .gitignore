@@ -1,4 +1,4 @@
 *.asv
-compara.mat
+*compara.mat
 *.mexw64
 slprj\*

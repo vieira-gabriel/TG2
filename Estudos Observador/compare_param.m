@@ -43,18 +43,18 @@ end
 
 
 if strcmp(compare_arq, 'arq2')
-    filter = 5;
+    filter = 3;
 else
     filter = 3;
 end
 
-chosed_values = intersect(idx_tv(1:filter), idx_iae(1:filter), idx_ise(1:filter));
+chosed_values = intersect(idx_tv(1:filter), idx_iae(1:filter));
 
 best = [];
 
 for i = chosed_values
     best = [best values_vector(1,i)];
-    disp([num2str(values_vector(1,i)), ' : tv = ', num2str(tv_vec(i)), ' iae = ', num2str(iae_vec(i)), 'ise = ', num2str(ise_vec(i))])
+    disp([num2str(values_vector(1,i)), ' : tv = ', num2str(tv_vec(i)), ' | iae = ', num2str(iae_vec(i)), ' | ise = ', num2str(ise_vec(i))])
 end
 
 if strcmp(compare_arq, 'arq2')
@@ -69,7 +69,22 @@ tv = calcTV(sinalControle_sem_filtro.data,Tsim);
 ise = calcISE(sinalSaida_sem_filtro.data,refSignal.data,Tsim);
 iae = calcIAE(sinalSaida_sem_filtro.data,refSignal.data,Tsim);
 iae_ise = iae/ise;
-disp([name, ' : tv = ', num2str(tv), ' iae = ', num2str(iae), 'ise = ', num2str(ise)])
+disp([name, ' : tv = ', num2str(tv), ' | iae = ', num2str(iae), ' | ise = ', num2str(ise)])
 
 disp('Valores selecionados como melhores: ')
 disp(best)
+
+bestTV = [];
+bestIAE = [];
+bestISE = [];
+for i = 1:filter
+    bestTV = [bestTV values_vector(1,idx_tv(i))];
+    bestIAE = [bestIAE values_vector(1,idx_iae(i))];
+    bestISE = [bestISE values_vector(1,idx_ise(i))];
+end
+disp('Melhores TV')
+disp(bestTV)
+disp('Melhores IAE')
+disp(bestIAE)
+disp('Melhores ISE')
+disp(bestISE)
