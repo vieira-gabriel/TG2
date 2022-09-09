@@ -7,28 +7,25 @@ var_ruido = 0.47;
 erro_tipico_medicao = sqrt(var_ruido);
 
 ref = 10;       % Amplitude do degrau de entrada do sistema
-Tref = 700;     % Instante em que o degrau de referencia eh aplicado
+Tref = 600;     % Instante em que o degrau de referencia eh aplicado
 dist = 5;       % Amplitude do degrau do disturbio
 Tdist = 2*Tref; % Momento em que o disturbio eh aplicado
-Thold = 400;    % Tempo em que deseja que o disturbio seja aplicado
+Thold = Tref;    % Tempo em que deseja que o disturbio seja aplicado
 Tdistdown = Tdist+Thold;    % Momento em que o disturbio é retirado
 Trefdown = Tref+Tdistdown;  % Momento em que a referencia retorna para zero
 Tsim = Tref+Trefdown;       % Tempo total que sera executado o Simulink
 Ts = 5;         % Tempo de amostragem
 s = tf([1 0],1);
 
-%K = 2.4673;
-%t1 = 17.6991;
-%t2 = 52.0833;
-%tau = sqrt(t1*t2);
-%lambda = 3*tau;
+K = 2.4673;
+t1 = 17.6991;
+t2 = 52.0833;
+tau = sqrt(t1*t2);
+lambda = 3*tau;
 
-%sysBot = minreal(K/((t1*s+1)*(t2*s+1)));
-%Z_sysBot = c2d(sysBot, Ts, 'zoh');
+sysBot = minreal(K/((t1*s+1)*(t2*s+1)));
+Z_sysBot = c2d(sysBot, Ts, 'zoh');
 
-%Kc = (t1+t2)/(K*lambda);
-%Ti = t1 + t2;
-%Td = t1*t2/Ti;
 
 P = 0.3105; % Valor Kp do controlador
 I = 0.0044; % Valor Ki do controlador
@@ -39,7 +36,7 @@ Pa = 0.0565;
 Pb = 0.0192;
 Ta = 1/Pa;
 Tb = 1/Pb;
-Td = Tb*(20/100); % Td é 20% da constante de tempo do polo mais lento
+Td = Tb*(50/100); % Td é 50% da constante de tempo do polo mais lento
 Qs = 1/((Td*s+1)^2); % Filtro do observador de distúrbio
 
 %Controlador Gs:
