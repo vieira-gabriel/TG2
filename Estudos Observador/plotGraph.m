@@ -61,9 +61,9 @@ axis([0 inf -25 35]);
 
 %%
 figure
-%%
-best_arq4=[70, 120];
+best_arq4=[70, 75];
 [rowl,columns] = size(best_arq4);
+colour_vec = ['b', 'g', 'r', 'c', 'y', 'k'];
 
 tiledlayout(2,1)
 
@@ -94,11 +94,11 @@ nexttile
 for c = 1:columns
     idx = find(values_vector_4 == best_arq4(c));
     if c == 1
-        plot(controles_4(idx)-disturb+observador_2(idx)-52+24, colour_vec(c))
+        plot(controles_4(idx)-disturb+observador_4(idx)-52+24, colour_vec(c))
         legendCell{c} = ['Controle real ',num2str(best_arq4(c)), '% arq4'];
         hold on
     else
-        plot(controles_4(idx)-disturb+observador_2(idx)-52+24, colour_vec(c))
+        plot(controles_4(idx)-disturb+observador_4(idx)-52+24, colour_vec(c))
         legendCell{c} = ['Controle real ',num2str(best_arq4(c)), '% arq4'];
     end
 end
