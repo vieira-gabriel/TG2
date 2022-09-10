@@ -13,9 +13,9 @@ Tref = 600;     % Instante em que o degrau de referencia eh aplicado
 dist = 5;       % Amplitude do degrau do disturbio
 Tdist = 2*Tref; % Momento em que o disturbio eh aplicado
 Thold = Tref;    % Tempo em que deseja que o disturbio seja aplicado
-Tdistdown = Tdist+Thold;    % Momento em que o disturbio é retirado
+Tdistdown = Tdist+Thold;    % Momento em que o disturbio eh retirado
 Trefdown = Tref+Tdistdown;  % Momento em que a referencia retorna para zero
-Tsim = Tref+Trefdown;       % Tempo total que sera executado o Simulink
+Tsim = Tref+Trefdown;       % Tempo total de execucao no Simulink
 Ts = 5;         % Tempo de amostragem
 
 %% Discretizacao do sinal
@@ -42,8 +42,8 @@ Pa = 0.0565;
 Pb = 0.0192;
 Ta = 1/Pa;
 Tb = 1/Pb;
-Td = Tb*(50/100); % Td é 50% da constante de tempo do polo mais lento
-Qs = 1/((Td*s+1)^2); % Filtro do observador de distúrbio
+Td = Tb*(50/100); % Td = 50% da constante de tempo do polo mais lento
+Qs = 1/((Td*s+1)^2); % Filtro do observador de disturbio
 
 Kg = 0.002677;
 
