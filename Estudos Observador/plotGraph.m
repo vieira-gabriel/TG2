@@ -4,154 +4,202 @@ load('compara')
 
 close all
 
-best_arq2=[65, 70];
+best_arq2=[35, 55];
 colour_vec = ['b', 'g', 'r', 'c', 'y', 'k'];
 [rowl,columns] = size(best_arq2);
 legenCell = cell(rowl,columns+2);
 
 %%
-tiledlayout(2,1)
-
-nexttile
-
+fig = figure;
 for c = 1:columns
-    idx = find(values_vector == best_arq2(c));
+    idx = find(p_vector == best_arq2(c));
     if c == 1
         plot(saidas_2(idx)+24, colour_vec(c))
-        legendCell{c} = ['Saída real ',num2str(best_arq2(c)), '% arq2'];
+        legendCell{c} = ['Nível da água (%) para Td = ',num2str(best_arq2(c)), '% * Tb'];
         hold on
     else
         plot(saidas_2(idx)+24, colour_vec(c))
-        legendCell{c} = ['Saída real ',num2str(best_arq2(c)), '% arq2'];
+        legendCell{c} = ['Nível da água (%) para Td = ',num2str(best_arq2(c)), '% * Tb'];
     end
 end
 plot(saida_1+24, 'm')
-legendCell{columns+1} = 'Saída arq 1';
+legendCell{columns+1} = 'Nível da água (%) da MFB';
 plot(ref+24, 'k')
-legendCell{columns+2} = 'ref';
+legendCell{columns+2} = 'Referência';
 legend(legendCell);
-axis([0 inf -10 65]);
+axis([0 inf 15 45]);
+title('Resposta - Arquitetura MOD')
+fig.WindowState = 'maximized';
+saveas(fig,['Imagens\Compara\Saida_MOD.png'])
 
-nexttile
 
-legenCell = cell(rowl,columns*2+2);
+fig = figure;
+
+legenCell = cell(rowl,columns+2);
 
 for c = 1:columns
-    idx = find(values_vector == best_arq2(c));
+    idx = find(p_vector == best_arq2(c));
     if c == 1
-        plot(controles_2(idx)-disturb+observador_2(idx)-52+24, colour_vec(c))
-        legendCell{c} = ['Controle real ',num2str(best_arq2(c)), '% arq2'];
+        plot(controles_2(idx)-disturb+observador_2(idx)-52, colour_vec(c))
+        legendCell{c} = ['Sinal de controle para Td = ',num2str(best_arq2(c)), '% * Tb'];
         hold on
     else
-        plot(controles_2(idx)-disturb+observador_2(idx)-52+24, colour_vec(c))
-        legendCell{c} = ['Controle real ',num2str(best_arq2(c)), '% arq2'];
+        plot(controles_2(idx)-disturb+observador_2(idx)-52, colour_vec(c))
+        legendCell{c} = ['Sinal de controle para Td = ',num2str(best_arq2(c)), '% * Tb'];
     end
 end
-for c = 1:columns
-    idx = find(values_vector == best_arq2(c));
-    plot(observador_2(idx), colour_vec(c+columns))
-    legendCell{c+columns} = ['Observador ',num2str(best_arq2(c)), '% arq2'];
-end
-plot(controle_1-disturb-52+24, 'm')
-legendCell{columns*2+1} = 'Controle arq 1';
+plot(controle_1-disturb-52, 'm')
+legendCell{columns+1} = 'Sinal de controle da MFB';
 plot(disturb, 'k')
-legendCell{columns*2+1} = 'disturbio';
+legendCell{columns+2} = 'Distúrbio';
 legend(legendCell);
-axis([0 inf -25 35]);
+axis([0 inf -5 10]);
+title('Sinal de controle - Arquitetura MOD')
+fig.WindowState = 'maximized';
+saveas(fig,['Imagens\Compara\Controle_MOD.png'])
+
+fig = figure;
+
+legenCell = cell(rowl,columns+1);
+
+for c = 1:columns
+    idx = find(p_vector == best_arq2(c));
+    if c == 1
+        plot(observador_2(idx), colour_vec(c))
+        legendCell{c} = ['Sinal do observador para Td = ',num2str(best_arq2(c)), '% * Tb'];
+        hold on
+    end
+    plot(observador_2(idx), colour_vec(c))
+    legendCell{c} = ['Sinal do observador para Td = ',num2str(best_arq2(c)), '% * Tb'];
+end
+plot(disturb, 'k')
+legendCell{columns+1} = 'Distúrbio';
+legend(legendCell);
+axis([0 inf -5 10]);
+hold off
+title('Sinal de distúrbio - Arquitetura MOD')
+fig.WindowState = 'maximized';
+saveas(fig,['Imagens\Compara\Disturbio_MOD.png'])
 
 %%
-figure
-best_arq4=[70, 75];
+best_arq4=[45, 55];
 [rowl,columns] = size(best_arq4);
 colour_vec = ['b', 'g', 'r', 'c', 'y', 'k'];
-
-tiledlayout(2,1)
-
-nexttile
+%%
+fig = figure;
 
 for c = 1:columns
-    idx = find(values_vector_4 == best_arq4(c));
+    idx = find(p_vector == best_arq4(c));
     if c == 1
         plot(saidas_4(idx)+24, colour_vec(c))
-        legendCell{c} = ['Saída real ',num2str(best_arq4(c)), '% arq4'];
+        legendCell{c} = ['Nível da água (%) para Td = ',num2str(best_arq4(c)), '% * Tb'];
         hold on
     else
         plot(saidas_4(idx)+24, colour_vec(c))
-        legendCell{c} = ['Saída real ',num2str(best_arq4(c)), '% arq4'];
+        legendCell{c} = ['Nível da água (%) para Td = ',num2str(best_arq4(c)), '% * Tb'];
     end
 end
 plot(saida_3+24, 'm')
-legendCell{columns+1} = 'Saída arq 3';
+legendCell{columns+1} = 'Nível da água (%) para MFE';
 plot(ref + 24, 'k')
-legendCell{columns+1} = 'ref';
+legendCell{columns+1} = 'Referência';
 legend(legendCell);
-axis([0 inf -10 65]);
+axis([0 inf 15 45]);
+title('Resposta - Arquitetura MOF')
+fig.WindowState = 'maximized';
+saveas(fig,['Imagens\Compara\Saida_MOF.png'])
 
-legenCell = cell(rowl,columns*2+2);
+legenCell = cell(rowl,columns+2);
 
-nexttile
+
+fig = figure;
 
 for c = 1:columns
-    idx = find(values_vector_4 == best_arq4(c));
+    idx = find(p_vector == best_arq4(c));
     if c == 1
-        plot(controles_4(idx)-disturb+observador_4(idx)-52+24, colour_vec(c))
-        legendCell{c} = ['Controle real ',num2str(best_arq4(c)), '% arq4'];
+        plot(controles_4(idx)-disturb+observador_4(idx)-52, colour_vec(c))
+        legendCell{c} = ['Sinal de controle para Td = ',num2str(best_arq4(c)), '% * Tb'];
         hold on
     else
-        plot(controles_4(idx)-disturb+observador_4(idx)-52+24, colour_vec(c))
-        legendCell{c} = ['Controle real ',num2str(best_arq4(c)), '% arq4'];
+        plot(controles_4(idx)-disturb+observador_4(idx)-52, colour_vec(c))
+        legendCell{c} = ['Sinal de controle para Td = ',num2str(best_arq4(c)), '% * Tb'];
     end
 end
-for c = 1:columns
-    idx = find(values_vector_4 == best_arq4(c));
-    plot(observador_4(idx), colour_vec(c+columns))
-    legendCell{c+columns} = ['Observador ',num2str(best_arq4(c)), '% arq4'];
-end
-plot(controle_3-disturb-52+24, 'm')
-legendCell{columns*2+1} = 'Controle arq 3';
+plot(controle_3-disturb-52, 'm')
+legendCell{columns+1} = 'Controle arq 3';
 plot(disturb, 'k')
-legendCell{columns*2+2} = 'disturbio';
+legendCell{columns+2} = 'Distúrbio';
 legend(legendCell);
-axis([0 inf -25 35]);
+axis([0 inf -5 10]);
 hold off
+title('Sinal de controle - Arquitetura MOF')
+fig.WindowState = 'maximized';
+saveas(fig,['Imagens\Compara\Controle_MOF.png'])
+
+fig = figure;
+
+legenCell = cell(rowl,columns+1);
+
+for c = 1:columns
+    idx = find(p_vector == best_arq4(c));
+    if c == 1
+        plot(observador_4(idx), colour_vec(c))
+        legendCell{c+columns} = ['Sinal do observador para Td = ',num2str(best_arq4(c)), '% * Tb'];
+        hold on
+    end
+    plot(observador_4(idx), colour_vec(c))
+    legendCell{c} = ['Sinal do observador para Td = ',num2str(best_arq4(c)), '% * Tb'];
+end
+plot(disturb, 'k')
+legendCell{columns+1} = 'Distúrbio';
+legend(legendCell);
+axis([0 inf -5 10]);
+hold off
+title('Sinal de distúrbio - Arquitetura MOF')
+fig.WindowState = 'maximized';
+saveas(fig,['Imagens\Compara\Disturbio_MOF.png'])
 
 %%
-figure
-%%
-best_arq4=[50, 120];
+fig = figure;
+%best_arq2 = [55];
+%best_arq4 = [55];
+
 [rowl,columns2] = size(best_arq2);
 [rowl,columns4] = size(best_arq4);
 
 legenCell = cell(rowl,columns2+columns4+2);
 
 for c = 1:columns2
-    idx = find(values_vector == best_arq2(c));
+    idx = find(p_vector == best_arq2(c));
     if c == 1
         plot(saidas_2(idx)+24, colour_vec(c))
-        legendCell{c} = ['Saída real ',num2str(best_arq2(c)), '% arq2'];
+        legendCell{c} = ['Nível da água (%) para Td = ',num2str(best_arq2(c)), '% * Tb'];
         hold on
     else
         plot(saidas_2(idx)+24, colour_vec(c))
-        legendCell{c} = ['Saída real ',num2str(best_arq2(c)), '% arq2'];
+        legendCell{c} = ['Nível da água (%) para Td = ',num2str(best_arq2(c)), '% * Tb'];
     end
 end
 for c = 1:columns4
-    idx = find(values_vector_4 == best_arq4(c));
+    idx = find(p_vector == best_arq4(c));
     if c == 1
         plot(saidas_4(idx)+24, colour_vec(c+columns2))
-        legendCell{c+columns2} = ['Saída real ',num2str(best_arq4(c)), '% arq4'];
+        legendCell{c+columns2} = ['Nível da água (%) para Td = ',num2str(best_arq4(c)), '% * Tb'];
         hold on
     else
         plot(saidas_4(idx)+24, colour_vec(c+columns2))
-        legendCell{c+columns2} = ['Saída real ',num2str(best_arq4(c)), '% arq4'];
+        legendCell{c+columns2} = ['Nível da água (%) para Td = ',num2str(best_arq4(c)), '% * Tb'];
     end
 end
-plot(saida_1+24, 'm')
-legendCell{columns2+columns4+1} = 'Saída arq 1';
+plot(saida_3+24, 'm')
+legendCell{columns2+columns4+1} = 'Nível da água (%) para MFE';
 plot(ref + 24, 'k')
-legendCell{columns2+columns4+2} = 'ref';
+legendCell{columns2+columns4+2} = 'Referência';
 legend(legendCell);
-axis([0 inf -10 65]);
+axis([0 inf 15 45]);
 hold off
+title('Comparação das respostas da MFE, MOD e MOF')
+fig.WindowState = 'maximized';
+saveas(fig,['Imagens\Compara\Melhores.png'])
 
 clear best_arq2 best_arq4 colour_vec rowl columns columns2 columns4 legenCell

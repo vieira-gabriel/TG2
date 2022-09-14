@@ -2,16 +2,12 @@ clear
 
 close all
 
-path = 'Melhorias Qs 4\';
-%path = 'Final\';
+%path = 'Melhorias Qs 4\';
+path = 'Final\';
 
-if strcmp(path, 'Final\')
-    values_vector = [50, 55, 60, 70, 75, 90, 100];
-else
-    values_vector = [45, 50, 55, 60, 65, 70, 75, 80, 85, 100];
-end
+p_vector = [30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100, 120];
 
-[r,columns] = size(values_vector);
+[r,columns] = size(p_vector);
 
 enablePlot = false;
 
@@ -22,9 +18,9 @@ controles_sim_2 = [];
 observador_2 = [];
 
 for c = 1:columns
-    filename = [path, 'arq2_tm', num2str(values_vector(1,c))];
+    filename = [path, 'arq2_tm', num2str(p_vector(1,c))];
     if exist('ref', 'var') == 0
-        load([path, 'arq2_tm', num2str(values_vector(1,1))], 'sinalRef', 'sinalDisturbio')
+        load([path, 'arq2_tm', num2str(p_vector(1,1))], 'sinalRef', 'sinalDisturbio')
         ref = sinalRef;
         disturb = sinalDisturbio;
         clear('sinalRef', 'sinalDisturbio');
@@ -42,40 +38,35 @@ for c = 1:columns
     
     if enablePlot
     fig1 = figure;
-    plot(sinalSaida+24, 'b')
+    plot(sinalSaida+24, 'g')
     hold on
     plot(Saida_Simulado+24, 'm')
     plot(sinalRef+24, 'k')
     plot(sinalDisturbio, 'r')
     legend('Nível da água (%)','Resposta simulação', 'Referência', 'Distúrbio')
-    title(['Resposta com Td = ',num2str(values_vector(1,c)),'% * Tb'])
+    title(['Resposta com Td = ',num2str(p_vector(1,c)),'% * Tb'])
     axis([0 inf -15 42]);
     hold off
     fig1.WindowState = 'maximized';
-    saveas(fig1,['Imagens\', path, 'arq2_', num2str(values_vector(1,c)),'.png'])
+    saveas(fig1,['Imagens\', path, 'arq2_', num2str(p_vector(1,c)),'.png'])
 
     fig2 = figure;
-    plot(sinalControle - sinalDisturbio + sinalObservador - 52 + 24, 'b')
+    plot(sinalControle - sinalDisturbio + sinalObservador - 52, 'b')
     hold on
-    plot(sinalObservador, 'g')
+    plot(sinalObservador, 'c')
     plot(sinalRef+24, 'k')
     plot(sinalDisturbio, 'r')
     legend('Sinal controlador','Sinal observador', 'Referência', 'Distúrbio')
-    title(['Sinais de controle e do observador com Td = ',num2str(values_vector(1,c)),'% * Tb'])
+    title(['Sinais de controle e do observador com Td = ',num2str(p_vector(1,c)),'% * Tb'])
     axis([0 inf -15 42]);
     hold off
     fig2.WindowState = 'maximized';
-    saveas(fig2,['Imagens\', path, 'arq2_', num2str(values_vector(1,c)),'_cont.png'])
+    saveas(fig2,['Imagens\', path, 'arq2_', num2str(p_vector(1,c)),'_cont.png'])
     end
 end
+close all;
 
-if strcmp(path, 'Final\')
-    values_vector_4 = [40, 45, 50, 55, 60, 65, 70, 75, 90, 120];
-else
-    values_vector_4 = [30, 35, 40, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 120];
-end
-
-[r,columns] = size(values_vector_4);
+[r,columns] = size(p_vector);
 
 saidas_4 = [];
 saidas_sim_4 = [];
@@ -84,9 +75,9 @@ controles_sim_4 = [];
 observador_4 = [];
 
 for c = 1:columns
-    filename = [path, 'arq4_tm', num2str(values_vector_4(1,c))];
+    filename = [path, 'arq4_tm', num2str(p_vector(1,c))];
     if exist('ref', 'var') == 0
-        load([path, 'arq4_tm', num2str(values_vector_4(1,1))], 'sinalRef', 'sinalDisturbio')
+        load([path, 'arq4_tm', num2str(p_vector(1,1))], 'sinalRef', 'sinalDisturbio')
         ref = sinalRef;
         disturb = sinalDisturbio;
         clear('sinalRef', 'sinalDisturbio');
@@ -104,30 +95,30 @@ for c = 1:columns
 
     if enablePlot
     fig1 = figure;
-    plot(sinalSaida+24, 'b')
+    plot(sinalSaida+24, 'g')
     hold on
     plot(Saida_Simulado+24, 'm')
     plot(sinalRef+24, 'k')
     plot(sinalDisturbio, 'r')
     legend('Nível da água (%)','Resposta simulação', 'Referência', 'Distúrbio')
-    title(['Resposta com Td = ',num2str(values_vector_4(1,c)),'% * Tb'])
+    title(['Resposta com Td = ',num2str(p_vector(1,c)),'% * Tb'])
     axis([0 inf -15 42]);
     hold off
     fig1.WindowState = 'maximized';
-    saveas(fig1,['Imagens\', path, 'arq4_', num2str(values_vector_4(1,c)),'.png'])
+    saveas(fig1,['Imagens\', path, 'arq4_', num2str(p_vector(1,c)),'.png'])
 
     fig2 = figure;
-    plot(sinalControle - sinalDisturbio + sinalObservador - 52 + 24, 'b')
+    plot(sinalControle - sinalDisturbio + sinalObservador - 52, 'b')
     hold on
-    plot(sinalObservador, 'g')
+    plot(sinalObservador, 'c')
     plot(sinalRef+24, 'k')
     plot(sinalDisturbio, 'r')
     legend('Sinal controlador','Sinal observador', 'Referência', 'Distúrbio')
-    title(['Sinais de controle e do observador com Td = ',num2str(values_vector_4(1,c)),'% * Tb'])
+    title(['Sinais de controle e do observador com Td = ',num2str(p_vector(1,c)),'% * Tb'])
     axis([0 inf -15 42]);
     hold off
     fig2.WindowState = 'maximized';
-    saveas(fig2,['Imagens\', path, 'arq4_', num2str(values_vector_4(1,c)),'_cont.png'])
+    saveas(fig2,['Imagens\', path, 'arq4_', num2str(p_vector(1,c)),'_cont.png'])
     end
 end
 
