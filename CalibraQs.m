@@ -2,40 +2,43 @@ clear
 
 load_variables
 
-%%
-Ts_vector = [85, 120];
+path = 'Estudos Observador\Melhorias Qs 4\';
+
+Ts_vector = [45, 50, 55, 60, 65, 70, 75, 80, 85, 100];
 [rows,columns] = size(Ts_vector);
 
-path = 'Melhorias QS 3\';
+for c = 1:columns
+    disp(['Runing Ts ', num2str(Ts_vector(1,c)), '%'])
+    Tm = Tb*(Ts_vector(1,c)/100);
+    Qs = 1/((Tm*s+1)^2);
 
-Tstepdown = Tstep+(Tref/2);
+    disp('Runing arq2')
+    workspace_name = ['arq2_tm', num2str(Ts_vector(1,c))];
+    
+    sim('arq2', Tsim); % Roda arquitetura com observador de disturbio e sem filtro estatistico
+    
+    save([path, workspace_name]);
+    
+    pause(20);
+end
+
+%%
+Ts_vector = [45, 50, 55, 60, 65, 70, 75, 80, 85, 100, 110, 120];
+[rows,columns] = size(Ts_vector);
+   
+pause(20);
 
 for c = 1:columns
     disp(['Runing Ts ', num2str(Ts_vector(1,c)), '%'])
     Tm = Tb*(Ts_vector(1,c)/100);
     Qs = 1/((Tm*s+1)^2);
     
-    for i = 1:2
-    arq = ['arq', num2str(i*2)];
-    disp(['Runing ' arq])
-    workspace_name = [arq, '_tm', num2str(Ts_vector(1,c))];
+    disp('Runing arq4')
+    workspace_name = ['arq4_tm', num2str(Ts_vector(1,c))];
     
-    sim(arq, Tsim);
+    sim('arq4', Tsim); % Roda arquitetura com observador de disturbio e com filtro estatistico
     
     save([path, workspace_name]);
     
-    pause(30);
-    end
+    pause(20);
 end
-
-%%
-
-disp('Runing arq 1')
-sim('arq1', Tsim);
-save([path, 'arq1_result']);
-
-%%
-
-disp('Runing arq 3')
-sim('arq3', Tsim);
-save([path, 'arq3_result']);
