@@ -4,7 +4,7 @@ load('compara')
 
 close all
 
-best_arq2=[35, 55];
+best_arq2=[55, 70];
 colour_vec = ['b', 'g', 'r', 'c', 'y', 'k'];
 [rowl,columns] = size(best_arq2);
 legenCell = cell(rowl,columns+2);
@@ -41,11 +41,11 @@ for c = 1:columns
     idx = find(p_vector == best_arq2(c));
     if c == 1
         plot(controles_2(idx)-disturb+observador_2(idx)-52, colour_vec(c))
-        legendCell{c} = ['Sinal de controle para Td = ',num2str(best_arq2(c)), '% * Tb'];
+        legendCell{c} = ['Td = ',num2str(best_arq2(c)), '% * Tb'];
         hold on
     else
         plot(controles_2(idx)-disturb+observador_2(idx)-52, colour_vec(c))
-        legendCell{c} = ['Sinal de controle para Td = ',num2str(best_arq2(c)), '% * Tb'];
+        legendCell{c} = ['Td = ',num2str(best_arq2(c)), '% * Tb'];
     end
 end
 plot(controle_1-disturb-52, 'm')
@@ -54,7 +54,7 @@ plot(disturb, 'k')
 legendCell{columns+2} = 'Distúrbio';
 legend(legendCell);
 axis([0 inf -5 10]);
-title('Sinal de controle - Arquitetura MOD')
+title('Saída do controlador - Arquitetura MOD')
 fig.WindowState = 'maximized';
 saveas(fig,['Imagens\Compara\Controle_MOD.png'])
 
@@ -66,18 +66,18 @@ for c = 1:columns
     idx = find(p_vector == best_arq2(c));
     if c == 1
         plot(observador_2(idx), colour_vec(c))
-        legendCell{c} = ['Sinal do observador para Td = ',num2str(best_arq2(c)), '% * Tb'];
+        legendCell{c} = ['Td = ',num2str(best_arq2(c)), '% * Tb'];
         hold on
     end
     plot(observador_2(idx), colour_vec(c))
-    legendCell{c} = ['Sinal do observador para Td = ',num2str(best_arq2(c)), '% * Tb'];
+    legendCell{c} = ['Td = ',num2str(best_arq2(c)), '% * Tb'];
 end
 plot(disturb, 'k')
 legendCell{columns+1} = 'Distúrbio';
 legend(legendCell);
 axis([0 inf -5 10]);
 hold off
-title('Sinal de distúrbio - Arquitetura MOD')
+title('Sinal do observador de distúrbio - Arquitetura MOD')
 fig.WindowState = 'maximized';
 saveas(fig,['Imagens\Compara\Disturbio_MOD.png'])
 
@@ -118,11 +118,11 @@ for c = 1:columns
     idx = find(p_vector == best_arq4(c));
     if c == 1
         plot(controles_4(idx)-disturb+observador_4(idx)-52, colour_vec(c))
-        legendCell{c} = ['Sinal de controle para Td = ',num2str(best_arq4(c)), '% * Tb'];
+        legendCell{c} = ['Td = ',num2str(best_arq4(c)), '% * Tb'];
         hold on
     else
         plot(controles_4(idx)-disturb+observador_4(idx)-52, colour_vec(c))
-        legendCell{c} = ['Sinal de controle para Td = ',num2str(best_arq4(c)), '% * Tb'];
+        legendCell{c} = ['Td = ',num2str(best_arq4(c)), '% * Tb'];
     end
 end
 plot(controle_3-disturb-52, 'm')
@@ -132,7 +132,7 @@ legendCell{columns+2} = 'Distúrbio';
 legend(legendCell);
 axis([0 inf -5 10]);
 hold off
-title('Sinal de controle - Arquitetura MOF')
+title('Saída do controlador - Arquitetura MOF')
 fig.WindowState = 'maximized';
 saveas(fig,['Imagens\Compara\Controle_MOF.png'])
 
@@ -144,25 +144,25 @@ for c = 1:columns
     idx = find(p_vector == best_arq4(c));
     if c == 1
         plot(observador_4(idx), colour_vec(c))
-        legendCell{c+columns} = ['Sinal do observador para Td = ',num2str(best_arq4(c)), '% * Tb'];
+        legendCell{c+columns} = ['Td = ',num2str(best_arq4(c)), '% * Tb'];
         hold on
     end
     plot(observador_4(idx), colour_vec(c))
-    legendCell{c} = ['Sinal do observador para Td = ',num2str(best_arq4(c)), '% * Tb'];
+    legendCell{c} = ['Td = ',num2str(best_arq4(c)), '% * Tb'];
 end
 plot(disturb, 'k')
 legendCell{columns+1} = 'Distúrbio';
 legend(legendCell);
 axis([0 inf -5 10]);
 hold off
-title('Sinal de distúrbio - Arquitetura MOF')
+title('Sinal do observador de distúrbio - Arquitetura MOF')
 fig.WindowState = 'maximized';
 saveas(fig,['Imagens\Compara\Disturbio_MOF.png'])
 
 %%
 fig = figure;
-%best_arq2 = [55];
-%best_arq4 = [55];
+best_arq2 = [55];
+best_arq4 = [45];
 
 [rowl,columns2] = size(best_arq2);
 [rowl,columns4] = size(best_arq4);

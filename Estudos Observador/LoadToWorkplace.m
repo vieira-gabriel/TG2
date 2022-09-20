@@ -5,11 +5,11 @@ close all
 %path = 'Melhorias Qs 4\';
 path = 'Final\';
 
-p_vector = [30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100, 120];
+p_vector = [30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100, 110, 120];
 
 [r,columns] = size(p_vector);
 
-enablePlot = false;
+enablePlot = true;
 
 saidas_2 = [];
 saidas_sim_2 = [];
@@ -46,6 +46,7 @@ for c = 1:columns
     legend('Nível da água (%)','Resposta simulação', 'Referência', 'Distúrbio')
     title(['Resposta com Td = ',num2str(p_vector(1,c)),'% * Tb'])
     axis([0 inf -15 42]);
+    ylabel('Valor do sinal') 
     hold off
     fig1.WindowState = 'maximized';
     saveas(fig1,['Imagens\', path, 'arq2_', num2str(p_vector(1,c)),'.png'])
@@ -59,6 +60,7 @@ for c = 1:columns
     legend('Sinal controlador','Sinal observador', 'Referência', 'Distúrbio')
     title(['Sinais de controle e do observador com Td = ',num2str(p_vector(1,c)),'% * Tb'])
     axis([0 inf -15 42]);
+    ylabel('Valor do sinal') 
     hold off
     fig2.WindowState = 'maximized';
     saveas(fig2,['Imagens\', path, 'arq2_', num2str(p_vector(1,c)),'_cont.png'])
@@ -103,6 +105,7 @@ for c = 1:columns
     legend('Nível da água (%)','Resposta simulação', 'Referência', 'Distúrbio')
     title(['Resposta com Td = ',num2str(p_vector(1,c)),'% * Tb'])
     axis([0 inf -15 42]);
+    ylabel('Valor do sinal') 
     hold off
     fig1.WindowState = 'maximized';
     saveas(fig1,['Imagens\', path, 'arq4_', num2str(p_vector(1,c)),'.png'])
@@ -116,6 +119,7 @@ for c = 1:columns
     legend('Sinal controlador','Sinal observador', 'Referência', 'Distúrbio')
     title(['Sinais de controle e do observador com Td = ',num2str(p_vector(1,c)),'% * Tb'])
     axis([0 inf -15 42]);
+    ylabel('Valor do sinal') 
     hold off
     fig2.WindowState = 'maximized';
     saveas(fig2,['Imagens\', path, 'arq4_', num2str(p_vector(1,c)),'_cont.png'])

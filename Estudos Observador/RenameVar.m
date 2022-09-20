@@ -4,7 +4,7 @@ clear
 values_vector = [45, 50, 55, 60, 65, 70, 75, 80, 85, 100, 110, 120];
 
 [r,columns] = size(values_vector);
-path = 'Melhorias Qs 3\';
+path = 'Melhorias Qs 2\';
 
 for c = 1:columns
     filename = [path, 'arq2_tm', num2str(values_vector(1,c))];
