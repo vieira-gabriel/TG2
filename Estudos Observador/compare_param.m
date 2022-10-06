@@ -7,7 +7,7 @@ path = 'Final\'; % Pasta com os arquivos dos testes finais
 
 p_vector = [30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100, 110, 120]; % Vetor com todas as porcentagens testadas
 [r,columns] = size(p_vector);
-filter = 8; % Filtro para obter os x melhores valores de cada parâmetro
+filter = 6; % Filtro para obter os x melhores valores de cada parâmetro
 
 Tmin = 1100;
 Tmax = 2300;
@@ -96,7 +96,7 @@ for arq = 1:2
     disp(bestISE)
     disp(['Melhores TV para arq ', arq_name])
     disp(bestTV)
-  %{
+  
     % Plotagem dos gráficos com os indicadores
     
     f = figure;
@@ -109,7 +109,9 @@ for arq = 1:2
     ylabel('Valor de IAE') 
     hold off
     title(['Comparação do parâmetro IAE para arquitetura ', arq_name])
+    set(gca, 'fontsize', 20, 'fontweight', 'bold');
     f.WindowState = 'maximized';
+    saveas(f,['Imagens\Parâmetros\IAE_', arq_name, '.png'])
     
     f = figure;
     plot(p_vector, ise_vec,colour)
@@ -121,7 +123,9 @@ for arq = 1:2
     ylabel('Valor de ISE') 
     hold off
     title(['Comparação do parâmetro ISE para arquitetura ', arq_name])
+    set(gca, 'fontsize', 20, 'fontweight', 'bold');
     f.WindowState = 'maximized';
+    saveas(f,['Imagens\Parâmetros\ISE_', arq_name, '.png'])
 
     f = figure;
     plot(p_vector, tv_vec,colour)
@@ -133,7 +137,9 @@ for arq = 1:2
     ylabel('Valor de TV') 
     hold off
     title(['Comparação do parâmetro TV para arquitetura ', arq_name])
+    set(gca, 'fontsize', 20, 'fontweight', 'bold');
     f.WindowState = 'maximized';
+    saveas(f,['Imagens\Parâmetros\TV_', arq_name, '.png'])
 
     if arq == 1
         tv_vec_2 = tv_vec;
@@ -152,7 +158,9 @@ for arq = 1:2
         xlim([25 125])
         hold off
         title('Comparação do parâmetro IAE entre arquiteturas MOD e MOF')
+        set(gca, 'fontsize', 20, 'fontweight', 'bold');
         f.WindowState = 'maximized';
+        saveas(f,['Imagens\Parâmetros\IAE_Compara.png'])
         
         f = figure;
         plot(p_vector, ise_vec_2,'g')
@@ -166,7 +174,9 @@ for arq = 1:2
         xlim([25 125])
         hold off
         title('Comparação do parâmetro ISE entre arquiteturas MOD e MOF')
+        set(gca, 'fontsize', 20, 'fontweight', 'bold');
         f.WindowState = 'maximized';
+        saveas(f,['Imagens\Parâmetros\ISE_Compara.png'])
 
         f = figure;
         plot(p_vector, tv_vec_2,'g')
@@ -180,7 +190,9 @@ for arq = 1:2
         xlim([25 125])
         hold off
         title('Comparação do parâmetro TV entre arquiteturas MOD e MOF')
+        set(gca, 'fontsize', 20, 'fontweight', 'bold');
         f.WindowState = 'maximized';
+        saveas(f,['Imagens\Parâmetros\TV_Compara.png'])
     end 
   %}
     clear tv_vec ise_vec iae_vec

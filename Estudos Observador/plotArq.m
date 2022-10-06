@@ -18,6 +18,7 @@ plot(sinalRef+24, 'b')
 legendCell{3} = 'Referência';
 legend(legendCell);
 title('Resposta da malha aberta')
+set(gca, 'fontsize', 20, 'fontweight', 'bold');
 axis([0 2100 -5 55]);
 hold off
 
@@ -40,6 +41,7 @@ plot(sinalRef+24, 'k')
 legendCell{4} = 'Referência';
 legend(legendCell);
 title('Resposta da arquitetura MFB')
+set(gca, 'fontsize', 20, 'fontweight', 'bold');
 axis([0 inf -5 45]);
 hold off
 fig.WindowState = 'maximized';
@@ -57,6 +59,7 @@ plot(sinalRef+24, 'k')
 legendCell{3} = 'Referência';
 legend(legendCell);
 title('Sinal de controle da arquitetura MFB')
+set(gca, 'fontsize', 20, 'fontweight', 'bold');
 axis([0 inf -5 37]);
 hold off
 fig.WindowState = 'maximized';
@@ -79,6 +82,7 @@ plot(sinalRef+24, 'k')
 legendCell{4} = 'Referência';
 legend(legendCell);
 title('Resposta da arquitetura MFE')
+set(gca, 'fontsize', 20, 'fontweight', 'bold');
 axis([0 inf -5 45]);
 hold off
 fig.WindowState = 'maximized';
@@ -96,6 +100,7 @@ plot(sinalRef+24, 'k')
 legendCell{3} = 'Referência';
 legend(legendCell);
 title('Sinal de controle da arquitetura MFE')
+set(gca, 'fontsize', 20, 'fontweight', 'bold');
 axis([0 inf -5 37]);
 hold off
 fig.WindowState = 'maximized';
@@ -118,6 +123,7 @@ plot(sinalRef+24, 'k')
 legendCell{4} = 'Referência';
 legend(legendCell);
 title('Resposta da arquitetura MFB')
+set(gca, 'fontsize', 20, 'fontweight', 'bold');
 axis([0 inf -5 45]);
 hold off
 fig.WindowState = 'maximized';
@@ -135,6 +141,7 @@ plot(sinalRef+24, 'k')
 legendCell{3} = 'Referência';
 legend(legendCell);
 title('Sinal de controle da arquitetura MFB')
+set(gca, 'fontsize', 20, 'fontweight', 'bold');
 axis([0 inf -5 37]);
 hold off
 fig.WindowState = 'maximized';
@@ -157,6 +164,7 @@ plot(sinalRef+24, 'k')
 legendCell{4} = 'Referência';
 legend(legendCell);
 title('Resposta da arquitetura MFE')
+set(gca, 'fontsize', 20, 'fontweight', 'bold');
 axis([0 inf -5 45]);
 hold off
 fig.WindowState = 'maximized';
@@ -174,6 +182,7 @@ plot(sinalRef+24, 'k')
 legendCell{3} = 'Referência';
 legend(legendCell);
 title('Sinal de controle da arquitetura MFE')
+set(gca, 'fontsize', 20, 'fontweight', 'bold');
 axis([0 inf -5 37]);
 hold off
 fig.WindowState = 'maximized';
