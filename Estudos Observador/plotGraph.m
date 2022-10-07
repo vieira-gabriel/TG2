@@ -30,6 +30,7 @@ legend(legendCell);
 axis([0 inf 15 45]);
 title('Resposta - Arquitetura MOD')
 set(gca, 'fontsize', 20, 'fontweight', 'bold');
+ylabel('Output signal') 
 fig.WindowState = 'maximized';
 saveas(fig,['Imagens\Compara\Saida_MOD.png'])
 
@@ -56,6 +57,7 @@ legendCell{columns+2} = 'Distúrbio';
 legend(legendCell);
 axis([0 inf -5 10]);
 title('Saída do controlador - Arquitetura MOD')
+ylabel('Controle signal') 
 set(gca, 'fontsize', 20, 'fontweight', 'bold');
 fig.WindowState = 'maximized';
 saveas(fig,['Imagens\Compara\Controle_MOD.png'])
@@ -81,6 +83,7 @@ axis([0 inf -5 10]);
 hold off
 title('Sinal do observador de distúrbio - Arquitetura MOD')
 set(gca, 'fontsize', 20, 'fontweight', 'bold');
+ylabel('Disturb observer signal')
 fig.WindowState = 'maximized';
 saveas(fig,['Imagens\Compara\Disturbio_MOD.png'])
 
@@ -109,6 +112,7 @@ legendCell{columns+1} = 'Referência';
 legend(legendCell);
 axis([0 inf 15 45]);
 title('Resposta - Arquitetura MOF')
+ylabel('Output signal') 
 set(gca, 'fontsize', 20, 'fontweight', 'bold');
 fig.WindowState = 'maximized';
 saveas(fig,['Imagens\Compara\Saida_MOF.png'])
@@ -137,6 +141,7 @@ legend(legendCell);
 axis([0 inf -5 10]);
 hold off
 title('Saída do controlador - Arquitetura MOF')
+ylabel('Controle signal') 
 set(gca, 'fontsize', 20, 'fontweight', 'bold');
 fig.WindowState = 'maximized';
 saveas(fig,['Imagens\Compara\Controle_MOF.png'])
@@ -161,6 +166,7 @@ legend(legendCell);
 axis([0 inf -5 10]);
 hold off
 title('Sinal do observador de distúrbio - Arquitetura MOF')
+ylabel('Disturb observer signal')
 set(gca, 'fontsize', 20, 'fontweight', 'bold');
 fig.WindowState = 'maximized';
 saveas(fig,['Imagens\Compara\Disturbio_MOF.png'])
@@ -206,6 +212,7 @@ axis([0 inf 15 45]);
 hold off
 title('Comparação das respostas da MFE, MOD e MOF')
 set(gca, 'fontsize', 20, 'fontweight', 'bold');
+ylabel('Output signal')
 fig.WindowState = 'maximized';
 saveas(fig,['Imagens\Compara\Melhores.png'])
 
