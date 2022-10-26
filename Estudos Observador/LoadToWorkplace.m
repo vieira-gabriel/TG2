@@ -5,11 +5,11 @@ close all
 %path = 'Melhorias Qs 4\';
 path = 'Final\';
 
-p_vector = [30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100, 110, 120];
+p_vector = [30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100, 110, 120, 130, 140, 150, 160];
 
 [r,columns] = size(p_vector);
 
-enablePlot = false;
+enablePlot = true;
 
 saidas_2 = [];
 saidas_sim_2 = [];

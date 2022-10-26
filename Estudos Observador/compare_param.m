@@ -5,9 +5,10 @@ clear
 close all
 path = 'Final\'; % Pasta com os arquivos dos testes finais
 
-p_vector = [30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100, 110, 120]; % Vetor com todas as porcentagens testadas
+p_vector = [30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100, 110, 120]%, 130, 140, 150, 160]; % Vetor com todas as porcentagens testadas
 [r,columns] = size(p_vector);
 filter = 6; % Filtro para obter os x melhores valores de cada parâmetro
+filter_tv = 12;
 
 Tmin = 1100;
 Tmax = 2300;
@@ -69,15 +70,19 @@ for arq = 1:2
     [sorted_iae,idx_iae] = sort(iae_vec);
     [sorted_ise,idx_ise] = sort(ise_vec);
     
-    chosen_values = intersect(idx_tv(1:filter), idx_iae(1:filter)); % Confere os melhores valores correspondentes de TV e IAE (quantidade de valores selecionados é determinada por filter) e armazena em chosen_values
+    chosen_values = intersect(idx_tv(1:filter_tv), idx_iae(1:filter)); % Confere os melhores valores correspondentes de TV e IAE (quantidade de valores selecionados é determinada por filter) e armazena em chosen_values
     chosen_values = intersect(chosen_values, idx_ise(1:filter)); % Confere os melhores valores correspondentes de ISE e chosen_values (que já possui os correspondentes de TV e IAE) e armazena em chosen_values
 
     best = [];
     % Identifica qual o valor da porcentagem corresponde aos melhores valores armazenados em chosen_values
     for i = chosen_values
         best = [best p_vector(1,i)];
-        disp([num2str(p_vector(1,i)), '  : iae = ', num2str(iae_vec(i)), ' | ise = ', num2str(ise_vec(i)), ' | tv = ', num2str(tv_vec(i))])
     end
+
+    for i = 1:columns
+        disp([num2str(p_vector(1,i)), '  : iae = ', num2str(iae_vec(i)), ' & ', num2str(ise_vec(i)), ' & ', num2str(tv_vec(i))])
+    end
+
     
     disp(['Valores selecionados como melhores para arq ', arq_name, ': '])
     disp(best)
@@ -86,9 +91,11 @@ for arq = 1:2
     bestIAE = [];
     bestISE = [];
     for i = 1:filter
-        bestTV = [bestTV p_vector(1,idx_tv(i))];
         bestIAE = [bestIAE p_vector(1,idx_iae(i))];
         bestISE = [bestISE p_vector(1,idx_ise(i))];
+    end
+    for i = 1:filter_tv
+        bestTV = [bestTV p_vector(1,idx_tv(i))];
     end
     disp(['Melhores IAE para arq ', arq_name])
     disp(bestIAE)
@@ -98,13 +105,13 @@ for arq = 1:2
     disp(bestTV)
   
     % Plotagem dos gráficos com os indicadores
-    
+    %{
     f = figure;
     plot(p_vector, iae_vec,colour)
     hold on
     yline(iae_1, '-.r', 'MFB IAE')
     yline(iae_3, '-.r', 'MFE IAE')
-    xlim([25 125])
+    xlim([p_vector(1)-5 p_vector(columns)+5])
     xlabel('Porcentagem (Td=x%*Tb)') 
     ylabel('Valor de IAE') 
     hold off
@@ -118,7 +125,7 @@ for arq = 1:2
     hold on
     yline(ise_1, '-.r', 'MFB ISE')
     yline(ise_3, '-.r', 'MFE ISE')
-    xlim([25 125])
+    xlim([p_vector(1)-5 p_vector(columns)+5])
     xlabel('Porcentagem (Td=x%*Tb)') 
     ylabel('Valor de ISE') 
     hold off
@@ -132,7 +139,7 @@ for arq = 1:2
     hold on
     yline(tv_1, '-.r', 'MFB TV')
     yline(tv_3, '-.r', 'MFE TV')
-    xlim([25 125])
+    xlim([p_vector(1)-5 p_vector(columns)+5])
     xlabel('Porcentagem (Td=x%*Tb)') 
     ylabel('Valor de TV') 
     hold off
@@ -155,7 +162,7 @@ for arq = 1:2
         legend('MOD IAE', 'MOF IAE')
         xlabel('Porcentagem (Td=x%*Tb)') 
         ylabel('Valor de IAE') 
-        xlim([25 125])
+        xlim([p_vector(1)-5 p_vector(columns)+5])
         hold off
         title('Comparação do parâmetro IAE entre arquiteturas MOD e MOF')
         set(gca, 'fontsize', 20, 'fontweight', 'bold');
@@ -171,7 +178,7 @@ for arq = 1:2
         legend('MOD ISE', 'MOF ISE')
         xlabel('Porcentagem (Td=x%*Tb)') 
         ylabel('Valor de ISE')
-        xlim([25 125])
+        xlim([p_vector(1)-5 p_vector(columns)+5])
         hold off
         title('Comparação do parâmetro ISE entre arquiteturas MOD e MOF')
         set(gca, 'fontsize', 20, 'fontweight', 'bold');
@@ -187,7 +194,7 @@ for arq = 1:2
         legend('MOD TV', 'MOF TV')
         xlabel('Porcentagem (Td=x%*Tb)') 
         ylabel('Valor de TV') 
-        xlim([25 125])
+        xlim([p_vector(1)-5 p_vector(columns)+5])
         hold off
         title('Comparação do parâmetro TV entre arquiteturas MOD e MOF')
         set(gca, 'fontsize', 20, 'fontweight', 'bold');
@@ -197,5 +204,3 @@ for arq = 1:2
   %}
     clear tv_vec ise_vec iae_vec
 end
-
-disp(tv_sum/columns)

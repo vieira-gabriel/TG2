@@ -10,6 +10,9 @@ if test1
 
 s = tf('s');
 
+sigma_n = 0.5;
+alpha_max = 0.008;
+
 T = 62;
 K = 2.6;
 
@@ -25,7 +28,8 @@ G_inv = Gs^(-1);
 
 G_inv_Q = Gs^(-1) * Qs;
 
-sigma_n = 0.5;
+Gz=c2d(Gs,Ts)
+[G_num,G_den] = tfdata(Gz^(-1),'v')
 
 %% Run simulation
 
@@ -1160,6 +1164,8 @@ s = tf('s');
 var_ruido = 0.0008;
 Ts = 0.1;
 
+alpha_max = 0.99;
+
 %Controlador Gs:
 Pa= 0.0565;
 Pb= 0.0192;
@@ -1185,6 +1191,9 @@ Td = Tb*(2/100);
 Qs = 1/((Td*s+1)^2);
 
 G_inv_Q = Gs^(-1) * Qs;
+
+Gz=c2d(Gs,Ts);
+[G_num,G_den] = tfdata(Gz^(-1),'v')
 
 %% Run simulation
 
