@@ -2,10 +2,10 @@ clear
 
 close all
 %'Melhorias Qs 4\
-path = 'Final\'
+path = 'Artigo\'
 %%
-%{
-load('MA.mat')
+
+load([path, 'MA.mat'])
 
 legenCell = cell(1,3);
 
@@ -24,6 +24,7 @@ hold off
 
 %}
 %%
+path = 'Final\'
 
 fig = figure
 load('Final\arq1_result.mat')

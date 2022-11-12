@@ -37,7 +37,7 @@ tv_sum = 0;
 for arq = 1:1
     for c = 1:columns
         if arq == 1
-            filename = ['arq11_tm', num2str(p_vector(1,c)), '.mat']; % Arq2 é o nome dado durante os testes para a arquitetura MOD
+            filename = ['arq11_d90_tm', num2str(p_vector(1,c)), '.mat']; % Arq2 é o nome dado durante os testes para a arquitetura MOD
             arq_name = 'Arq 11';
             colour = 'g';
         else

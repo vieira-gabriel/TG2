@@ -52,13 +52,73 @@ for c = 1:columns
     saveas(fig1,['Figuras\', path, 'arq11_', num2str(p_vector(1,c)),'.png'])
 
     fig2 = figure;
-    plot(sinalControle - sinalDisturbio + sinalObservador - 52, 'b')
+    %plot(sinalControle - sinalDisturbio + sinalObservador - 52, 'b')
+    plot(sinalControle - sinalDisturbio - 52, 'b')
     hold on
     plot(sinalObservador, 'c')
     plot(sinalRef+24, 'k')
     plot(sinalDisturbio, 'r')
     legend('Sinal controlador','Sinal observador', 'Referência', 'Distúrbio')
     title(['Sinais de controle e do observador com Td = ',num2str(p_vector(1,c)),'% * Tb'])
+    axis([0 inf -5 45]);
+    ylabel('Valor do sinal') 
+    set(gca, 'fontsize', 20, 'fontweight', 'bold');
+    hold off
+    fig2.WindowState = 'maximized';
+    saveas(fig2,['Figuras\', path, 'arq11_', num2str(p_vector(1,c)),'_cont.png'])
+    end
+end
+
+saidas_11_d90 = [];
+saidas_sim_11_d90 = [];
+controles_11_d90 = [];
+controles_sim_11_d90 = [];
+observador_11_d90 = [];
+
+for c = 1:columns
+    filename = [path, 'arq11_d90_tm', num2str(p_vector(1,c))];
+    if exist('ref', 'var') == 0
+        load([path, 'arq11_tm', num2str(p_vector(1,1))], 'sinalRef', 'sinalDisturbio')
+        ref = sinalRef;
+        disturb = sinalDisturbio;
+        clear('sinalRef', 'sinalDisturbio');
+    end
+
+    load(filename,'sinalRef', 'sinalDisturbio', 'sinalObservador', 'sinalControle', 'sinalSaida', 'Controle_Simulado', 'Saida_Simulado')
+    controle_corrigido = sinalControle - 52;
+    controle_sim_corrigido = Controle_Simulado - 52;
+
+    saidas_11_d90 = [saidas_11_d90 sinalSaida];
+    saidas_sim_11_d90 = [saidas_sim_11_d90 Saida_Simulado];
+    controles_11_d90 = [controles_11_d90 sinalControle];
+    controles_sim_11_d90 = [controles_sim_11_d90 Controle_Simulado];
+    observador_11_d90 = [observador_11 sinalObservador];
+    
+    if enablePlot
+    fig1 = figure;
+    plot(sinalSaida+24, 'g')
+    hold on
+    plot(Saida_Simulado+24, 'm')
+    plot(sinalRef+24, 'k')
+    plot(sinalDisturbio, 'r')
+    legend('Nível da água (%)','Resposta simulação', 'Referência', 'Distúrbio')
+    title(['Resposta com Td = ',num2str(p_vector(1,c)),'% * Tb | Detuning 10%'])
+    axis([0 inf -5 45]);
+    ylabel('Valor do sinal') 
+    set(gca, 'fontsize', 20, 'fontweight', 'bold');
+    hold off
+    fig1.WindowState = 'maximized';
+    saveas(fig1,['Figuras\', path, 'arq11_', num2str(p_vector(1,c)),'.png'])
+
+    fig2 = figure;
+    %plot(sinalControle - sinalDisturbio + sinalObservador - 52, 'b')
+    plot(sinalControle - sinalDisturbio - 52, 'b')
+    hold on
+    plot(sinalObservador, 'c')
+    plot(sinalRef+24, 'k')
+    plot(sinalDisturbio, 'r')
+    legend('Sinal controlador','Sinal observador', 'Referência', 'Distúrbio')
+    title(['Sinais de controle e do observador com Td = ',num2str(p_vector(1,c)),'% * Tb | Detuning 10%'])
     axis([0 inf -5 45]);
     ylabel('Valor do sinal') 
     set(gca, 'fontsize', 20, 'fontweight', 'bold');
